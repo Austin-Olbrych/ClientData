@@ -50,7 +50,7 @@ public partial class TEAM_PROJECT_DataEntry : System.Web.UI.Page
             txtPhoneNum.Text + "','" +
             txtEmail.Text + "','" +
             txtEmergConName.Text + "','" +
-            txtEmergeConNum.Text + "');";
+            txtEmergConNum.Text + "');";
         //Insert
         try
         {
@@ -74,6 +74,20 @@ public partial class TEAM_PROJECT_DataEntry : System.Web.UI.Page
         con.Close();
         //Response.Write(@"<script langauge='text/javascript'>alert('Client Info has been added. Navigating to vital information.');</script>");
         //Response.Redirect("Vitals.aspx", false);
+
+        //Tests for data in textboxes
+        //if (txtID.Text.Equals("")) { Response.Write(@"<script langauge='text/javascript'>alert('Please enter an ID number.');</script>"); } //Auto filled
+        if (txtFirstName.Text.Equals("")) { Response.Write(@"<script langauge='text/javascript'>alert('Please enter your first name.');</script>"); }
+        else if (txtLastName.Text.Equals("")) { Response.Write(@"<script langauge='text/javascript'>alert('Please enter your last name.');</script>"); }
+        else if (txtPhoneNum.Text.Equals("")) { Response.Write(@"<script langauge='text/javascript'>alert('Please enter your phone number.');</script>"); }
+        else if (txtEmail.Text.Equals("")) { Response.Write(@"<script langauge='text/javascript'>alert('Please enter your email.');</script>"); }
+        else if (txtEmergConName.Text.Equals("")) { Response.Write(@"<script langauge='text/javascript'>alert('Please enter your emergency contact.');</script>"); }
+        else if (txtEmergConNum.Text.Equals("")) { Response.Write(@"<script langauge='text/javascript'>alert('Please enter your emergency contact number.');</script>"); }
+        else
+        {
+            Response.Write(@"<script langauge='text/javascript'>alert('All your data was submitted. Now navigating to Exercise page');</script>");
+        }
+
     }
 
     protected void btnLogout_Click(object sender, EventArgs e)
@@ -84,5 +98,39 @@ public partial class TEAM_PROJECT_DataEntry : System.Web.UI.Page
         Session.RemoveAll();
         System.Web.Security.FormsAuthentication.SignOut();
         Response.Redirect("Login.aspx", false);
+    }
+
+    protected void btnSearch_Click(object sender, EventArgs e)
+    {
+        //Begin Connection
+        con.ConnectionString = "Data source=silver.mountunion.edu;initial catalog=ClientData; " +
+            "Persist Security Info=True; User ID=ClientData; Password=Helium39day";
+        con.Open();
+        cmd = new SqlCommand();
+        cmd.Connection = con;
+        cmd.CommandType = CommandType.Text;
+        cmd.CommandText = "SELECT ParticipantID, FirstName, LastName, Suffix FROM UserProfile WHERE " +
+            txtFirstName.Text + "','" +
+            txtLastName.Text + "','" +
+            txtID.Text + "');";
+        //Insert
+        try
+        {
+            Response.Write(@"<script langauge='text/javascript'>alert('IN THE TRY');</script>");
+            numRowsAffected = cmd.ExecuteNonQuery();
+            if (numRowsAffected == 1)
+            {
+                Response.Write(@"<script langauge='text/javascript'>alert('DATA WAS ADDED. CHECK DATABASE');</script>");
+            }
+            else
+            {
+                Response.Write(@"<script langauge='text/javascript'>alert('DATA NOT INSERTED');</script>");
+            }
+        }
+        catch (Exception ex)
+        {
+            Response.Write(@"<script langauge='text/javascript'>alert('IN THE CATCH');</script>");
+            Response.Write(ex.Message);
+        }
     }
 }
