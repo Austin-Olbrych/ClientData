@@ -47,7 +47,16 @@
                                         <td align="center"><asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click" />
                                     </tr>
                                     <tr colspan="2">
-                                        <td align="left"><asp:GridView />
+                                        <td align="left">
+                                            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="ParticipantID" DataSourceID="sdsExistingClient">
+                                                <Columns>
+                                                    <asp:BoundField DataField="ParticipantID" HeaderText="ParticipantID" ReadOnly="True" SortExpression="ParticipantID" />
+                                                    <asp:BoundField DataField="FirstName" HeaderText="FirstName" SortExpression="FirstName" />
+                                                    <asp:BoundField DataField="LastName" HeaderText="LastName" SortExpression="LastName" />
+                                                    <asp:BoundField DataField="Suffix" HeaderText="Suffix" SortExpression="Suffix" />
+                                                </Columns>
+                                            </asp:GridView>
+                                            <asp:SqlDataSource ID="sdsExistingClient" runat="server" ConnectionString="<%$ ConnectionStrings:ClientDataConnectionString %>" SelectCommand="SELECT [ParticipantID], [FirstName], [LastName], [Suffix] FROM [UserProfile]"></asp:SqlDataSource>
                                     </tr>
                                 </tr>
                             </table>
@@ -79,6 +88,22 @@
                                 <tr>
                                      <td align="right"><asp:Label ID="lblSuffix" runat="server" Text="Suffix"></asp:Label></td>
                                      <td><asp:TextBox ID="txtSuffix" runat="server"></asp:TextBox></td>
+                                </tr>
+                                <tr>
+                                     <td align="right"><asp:Label ID="lblSport" runat="server" Text="Sport"></asp:Label></td>
+                                     <td>
+                                         <asp:DropDownList ID="ddlSport" runat="server" DataSourceID="sdsSport" DataTextField="Sport" DataValueField="Sport" OnDataBound="ddlSport_DataBound" OnSelectedIndexChanged="ddlSport_SelectedIndexChanged"></asp:DropDownList>
+                                         <asp:SqlDataSource ID="sdsSport" runat="server" ConnectionString="<%$ ConnectionStrings:ClientDataConnectionString %>" SelectCommand="SELECT [Sport] FROM [Sport]"></asp:SqlDataSource>
+                                     </td>
+                                </tr>
+                                <tr>
+                                     <td align="right"><asp:Label ID="lblGender" runat="server" Text="Gender"></asp:Label></td>
+                                     <td colspan="2">
+                                         <asp:RadioButtonList ID="rdblGender" runat="server" >
+                                            <asp:ListItem ID="rdbMale" runat="server" Text="Male" />
+                                            <asp:ListItem ID="rdbFemale" runat="server" Text="Female"/>
+                                         </asp:RadioButtonList>
+                                     </td>
                                 </tr>
                                 <tr>
                                      <td align="right"><asp:Label ID="lblPhoneNum" runat="server" Text="Phone Num"></asp:Label></td>
