@@ -4,17 +4,17 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>410 Project - Vital Entry</title>
+    <title>Client Data - Vitals</title>
 </head>
 <body>
     <form id="form1" runat="server" autocomplete="off">
-        <div align="center">
+        <div align="center" style="padding:10px; background-color:lightgrey;">
             <table width="100%">
                 <tr>
                     <td align="left" width="25%"><asp:Label ID="lblUser" runat="server" Text=""/></td>
-                    <td align="center" width="50%"><asp:Button ID="hlEditUser" runat="server" Text="Admin Page" />
-                        <asp:button ID="hlDataEntry" runat="server" Text="Data Entry Page" />
-                        <asp:button ID="hlReports" runat="server" Text="Reports Page" /></td>
+                    <td align="center" width="50%"><asp:Button ID="btnEditUser" runat="server" Text="Admin Page" OnClick="btnEditUser_Click" />
+                        <asp:button ID="btnDataEntry" runat="server" Text="Data Entry Page" OnClick="btnDataEntry_Click"/>
+                        <asp:button ID="btnReports" runat="server" Text="Reports Page" OnClick="btnReports_Click" /></td>
                     <td align="right" width="25%"><asp:Button ID="btnLogout" runat="server" Text="Logout" OnClick="btnLogout_Click"/></td>
                 </tr>
             </table>
@@ -47,11 +47,11 @@
                      <td><asp:TextBox ID="txtRace" runat="server"></asp:TextBox></td>
                 </tr>
                 <tr>
-                     <td align="right"><asp:Label ID="lblHeight" runat="server" Text="Height"></asp:Label></td>
+                     <td align="right"><asp:Label ID="lblHeight" runat="server" Text="Height (Decimal)"></asp:Label></td>
                      <td><asp:TextBox ID="txtHeight" runat="server"></asp:TextBox></td>
                 </tr>
                 <tr>
-                     <td align="right"><asp:Label ID="lblMass" runat="server" Text="Mass"></asp:Label></td>
+                     <td align="right"><asp:Label ID="lblMass" runat="server" Text="Mass (Decimal)"></asp:Label></td>
                      <td><asp:TextBox ID="txtMass" runat="server"></asp:TextBox></td>
                 </tr>
                 <tr>
@@ -59,12 +59,14 @@
                      <td><asp:TextBox ID="txtBloodGlucose" runat="server"></asp:TextBox></td>
                 </tr>
                 <tr>
-                     <td align="right"><asp:Label ID="lblRMR" runat="server" Text="RMR"></asp:Label></td>
+                     <td align="right"><asp:Label ID="lblRMR" runat="server" Text="RMR (Decimal)"></asp:Label></td>
                      <td><asp:TextBox ID="txtRMR" runat="server"></asp:TextBox></td>
                 </tr>
                 <tr>
                      <td align="right"><asp:Label ID="lblBloodPress" runat="server" Text="Blood Pressure"></asp:Label></td>
-                     <td><asp:TextBox ID="txtBloodPress" runat="server" Text=""></asp:TextBox></td>
+                     <td><asp:TextBox ID="txtBloodPressTop" runat="server" Text="" Width="30px"></asp:TextBox>
+                         <asp:Label ID="lblSlash" runat="server" Text="  /  " Font-Bold="True"></asp:Label>
+                         <asp:TextBox ID="txtBloodPressBottom" runat="server" Text="" Width="30px"></asp:TextBox></td>
                 </tr>
                 <tr>
                      <td align="right"><asp:Label ID="lblHeartRate" runat="server" Text="Heart Rate"></asp:Label></td>
@@ -73,6 +75,10 @@
                 <tr>
                      <td align="right"><asp:Label ID="lblUsername" runat="server" Text="Username"></asp:Label></td>
                      <td><asp:TextBox ID="txtUsername" runat="server" Text=""></asp:TextBox></td>
+                </tr>
+                <tr>
+                    <td align="right"><asp:Label ID="lblEntryDate" runat="server" Text="Entry Date"></asp:Label></td>
+                    <td><asp:TextBox ID="txtStartDate" runat="server" Text=""></asp:TextBox></td>
                 </tr>
                 <th colspan ="2" align="center">
                     <asp:Button ID="btnVitals" runat="server" Text="Enter" OnClick="btnVitals_Click" />

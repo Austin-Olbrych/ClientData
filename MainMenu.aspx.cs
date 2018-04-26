@@ -18,7 +18,7 @@ public partial class MainMenu : System.Web.UI.Page
         }
         else
         {
-            Response.Redirect("Login.aspx", false);
+            Response.Redirect("Default.aspx", false);
         }
         //Determines Permissions
         if (Convert.ToString(Session["permission"]) == "0")
@@ -27,12 +27,12 @@ public partial class MainMenu : System.Web.UI.Page
         }
         if (Convert.ToString(Session["permission"]) == "1")
         {
-            hlEditUser.Visible = false;
+            btnEditUser.Visible = false;
         }
         if (Convert.ToString(Session["permission"]) == "2")
         {
-            hlEditUser.Visible = false;
-            hlDataEntry.Visible = false;
+            btnEditUser.Visible = false;
+            btnDataEntry.Visible = false;
         }
     }
 
@@ -42,12 +42,12 @@ public partial class MainMenu : System.Web.UI.Page
         Session.Clear();
         Session.RemoveAll();
         System.Web.Security.FormsAuthentication.SignOut();
-        Response.Redirect("Login.aspx",false);
+        Response.Redirect("Default.aspx", false);
     }
 
-    protected void btnDataEntry_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("Vitals.aspx", false);
-        
-    }
+    protected void btnDataEntry_Click(object sender, EventArgs e) { Response.Redirect("ClientInfo.aspx", false); }
+
+    protected void btnEditUser_Click(object sender, EventArgs e) { Response.Redirect("AdminMenu.aspx", false); }
+
+    protected void btnReports_Click(object sender, EventArgs e) { Response.Redirect("Report.aspx", false); }
 }
